@@ -1,4 +1,11 @@
 <?php
+$texto = 'El "café" cuesta < $5.00';
+// htmlspecialchars convierte caracteres especiales a entidades HTML
+// Esto es útil para evitar ataques XSS (Cross-Site Scripting)
+// htmlspecialchars convierte caracteres especiales a entidades HTML
+// htmlspecialchars($texto, ENT_QUOTES, 'UTF-8') convierte comillas simples y dobles
+echo htmlspecialchars($texto, ENT_QUOTES, 'UTF-8');
+echo '<br/>';
 
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {

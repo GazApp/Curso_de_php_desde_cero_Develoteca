@@ -45,3 +45,92 @@ fcogaz@MacBook-Pro-de-FCO ~ %
 
 
 //  /usr/local/opt/php/sbin/php-fpm --nodaemonize
+
+
+
+
+<?php
+
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["lenguaje"]) && isset($_POST["mac"])) {
+    $nombre= trim($_POST["nombre"]);
+    $lenguaje = isset($_POST["lenguaje"]);
+    $mac = isset($_POST["mac"]);
+    $windows = isset($_POST["windows"]);
+    $linux = isset($_POST["linux"]);
+
+    // Validación simple
+
+    if (empty($nombre) && empty($lenguaje)  && empty($mac)) {
+        echo "El nombre es obligatorio y el lenguaje es obligatorio y S.O. son Obligatorios.";
+    } elseif (!preg_match("/^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$/", $nombre)) {
+        echo "El nombre solo puede contener letras y espacios.";
+    } else {
+        $lenguaje_limpio = htmlspecialchars($lenguaje, ENT_QUOTES, 'UTF-8');
+        $nombre_limpio = htmlspecialchars($nombre, ENT_QUOTES, 'UTF-8');
+       $mac_limpio = htmlspecialchars($mac, ENT_QUOTES, 'UTF-8');
+        $mensaje = "Hola <strong>$nombre_limpio</strong>, tu lenguaje favorito es: <strong>$lenguaje_limpio</strong>, tu Sistema Operativo es: <strong>$mac_limpio</strong>,  .";
+    }
+}else {
+    echo "Por favor, completa el formulario.";
+}
+
+
+?>
+
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Formulario</title>
+</head>
+
+<body>
+
+<h2>Formulario</h2>
+<br/>
+<form action="ejercicio31.php" method="post">
+    <label for="nombre">Nombre:</label>
+    <input type="text" id="nombre" name="nombre" required>
+</br>
+</br>
+<h3>INPUT RADIO:</h3>
+<h3>Lenguaje de Programación que te gusta:</h3>
+
+    <input type="radio" id="php" name="lenguaje" value="PHP">
+    <label for="php">PHP</label><br>
+    <input type="radio" id="javascript" name="lenguaje" value="JavaScript">
+    <label for="javascript">JavaScript</label><br>
+    <input type="radio" id="java" name="lenguaje" value="Java">
+    <label for="java">Java</label><br>
+    <input type="radio" id="python" name="lenguaje" value="Python">
+    <label for="python">Python</label><br>
+    <input type="radio" id="csharp" name="lenguaje" value="C#">
+    <label for="csharp">C#</label><br>
+    <br>
+    <br>
+    <h3>Check Box:</h3>
+    <h3>¿Qué sistema operativo usas?</h3>
+    <input type="checkbox" name="mac" id="">
+    <label for="mac">Mac</label><br>
+    <input type="checkbox" name="windows" id="">
+    <label for="windows">Windows</label><br>
+    <input type="checkbox" name="linux" id="">
+    <label for="linux">Linux</label><br>
+    <br>
+    <br>
+    <input type="submit" value="Enviar">
+
+
+
+
+    <!-- Mostrar mensaje si existe -->
+<?php if (!empty($mensaje)): ?>
+    <h2 style="color:blue"><?= $mensaje ?></h2>
+<?php endif; ?>
+
+</form>
+
+</body>
+</html>
