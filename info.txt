@@ -1,3 +1,6 @@
+UPDATE 26-06-25 12:49
+
+
 
 nally, check DirectoryIndex includes index.php
 DirectoryIndex index.php index.html
